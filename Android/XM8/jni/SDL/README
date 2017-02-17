@@ -1,0 +1,6 @@
+place SDL 2.0 source code here.
+
+Android.mk
+include/
+src/
+and other files...
