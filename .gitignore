@@ -7,3 +7,4 @@ UI/*.o
 macOS/*.wav
 macOS/*.rom
 macOS/xm8
+macOS/Brewfile.lock.json
