@@ -47,6 +47,19 @@
 #include <time.h>
 #endif // __ANDROID__
 
+
+//
+// macOS
+//
+#if defined(__APPLE__)
+#include <SDL2/SDL.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#endif // __APPLE__
+
+
 #endif // OS_H
+
 
 #endif // SDL
