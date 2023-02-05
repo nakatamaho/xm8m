@@ -116,3 +116,15 @@ clean:
 	rm $(OBJS)
 	rm $(TARGET)
 
+
+FRAMEWORK_PATH=$(HOME)/Library/Frameworks
+APP_NAME=xm8
+
+package_app:
+	rm -rf "./$(APP_NAME).app/"
+	mkdir -p "./$(APP_NAME).app"/Contents/{Frameworks,MacOS,Resources}
+	# cp -R "$(FRAMEWORK_PATH)/SDL2.framework" "./$(APP_NAME).app/Contents/Resources/"
+	cp Info.plist "./$(APP_NAME).app/Contents/"
+	sed -e "s/APP_NAME/$(APP_NAME)/g" -i "" "./$(APP_NAME).app/Contents/Info.plist"
+	cp ./xm8 "./$(APP_NAME).app/Contents/MacOS/$(APP_NAME)"
+	cp ./AppIcon.icns "./$(APP_NAME).app/Contents/Resources/"
