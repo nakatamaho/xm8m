@@ -118,7 +118,7 @@ clean:
 
 
 FRAMEWORK_PATH=$(HOME)/Library/Frameworks
-APP_NAME=xm8
+APP_NAME=XM8
 
 package_app:
 	rm -rf "./$(APP_NAME).app/"
