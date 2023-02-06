@@ -12,7 +12,7 @@
 # tool chain
 #
 
-CXX = g++
+CXX = clang
 
 STRIP = strip
 
@@ -28,7 +28,7 @@ SDL_LDFLAGS := $(shell sdl2-config --libs)
 # compile options
 #
 
-CXXFLAGS = -DSDL -D_PC8801MA -c -O2 -Wall \
+CXXFLAGS = -arch x86_64 -DSDL -D_PC8801MA -c -O2 -Wall \
 			-Wno-macro-redefined \
 			-Wno-non-c-typedef-for-linkage \
 			-Wno-deprecated-declarations \
@@ -105,7 +105,7 @@ OBJS = $(SRCS:%.cpp=%.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(SDL_LDFLAGS)
+	$(CXX) -o $(TARGET) $(OBJS) $(SDL_LDFLAGS) -lc++
 	$(STRIP) $(TARGET) 
 
 #
@@ -119,12 +119,16 @@ clean:
 
 FRAMEWORK_PATH=$(HOME)/Library/Frameworks
 APP_NAME=XM8
+VERSION=1.6.1
+APP_ICON=AppIcon.png
 
 package_app:
 	rm -rf "./$(APP_NAME).app/"
+	bash iconcreate.sh $(APP_ICON)
 	mkdir -p "./$(APP_NAME).app"/Contents/{Frameworks,MacOS,Resources}
 	# cp -R "$(FRAMEWORK_PATH)/SDL2.framework" "./$(APP_NAME).app/Contents/Resources/"
 	cp Info.plist "./$(APP_NAME).app/Contents/"
 	sed -e "s/APP_NAME/$(APP_NAME)/g" -i "" "./$(APP_NAME).app/Contents/Info.plist"
-	cp ./xm8 "./$(APP_NAME).app/Contents/MacOS/$(APP_NAME)"
-	cp ./AppIcon.icns "./$(APP_NAME).app/Contents/Resources/"
+	sed -e "s/VERSION/$(VERSION)/g" -i "" "./$(APP_NAME).app/Contents/Info.plist"
+	mv ./xm8 "./$(APP_NAME).app/Contents/MacOS/$(APP_NAME)"
+	mv ./AppIcon.icns "./$(APP_NAME).app/Contents/Resources/"
