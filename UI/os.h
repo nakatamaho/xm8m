@@ -56,6 +56,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <iconv.h>
+#include <errno.h>
+#define pr_err(fmt, ...) fprintf(stderr, fmt, ##__VA_ARGS__)
 #endif // __APPLE__
 
 

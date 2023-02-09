@@ -415,7 +415,12 @@ const char* Platform::FindNext(Uint32 *info)
 	}
 
 	// name
+	#ifdef __APPLE__
+	converter->Utf8macToUtf8(entry->d_name, dir_name_utf8, strlen(entry->d_name) + 1);
+	converter->UtfToSjis(dir_name_utf8, dir_name);
+	#else
 	converter->UtfToSjis(entry->d_name, dir_name);
+	#endif
 
 	// directory ?
 	if (entry->d_type == DT_DIR) {
