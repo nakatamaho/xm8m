@@ -32,6 +32,18 @@ typedef int errno_t;
 #define stricmp strcasecmp
 #endif	// __linux__
 
+// macOS
+#ifdef __APPLE__
+#define __LITTLE_ENDIAN__
+#define _MAX_PATH			4096
+#define __min	min
+#define __stdcall
+typedef int errno_t;
+#define strnicmp strncasecmp
+#define stricmp strcasecmp
+#endif	// __APPLE__
+
+
 // max() and min() macro
 #ifndef max
 #define max(a, b) ((a) > (b) ? (a) : (b))
